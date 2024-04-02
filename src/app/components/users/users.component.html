@@ -1,0 +1,39 @@
+<form>
+    <div class="card">
+    <label for="staticName" class="col-sm-2 col-form-label"><h1>Profilo di:
+        <input type="text" value={{user.name}} disabled></h1></label>
+
+    <label for="staticUsername" class="col-sm-2 col-form-label"><p><b>Nome Utente</b>:
+        <input type="text" value={{user.username}} disabled></p></label>
+
+    <label for="staticEmail" class="col-sm-2 col-form-label"><p><b>Email</b>:
+        <input type="text" value={{user.email}} disabled></p></label>
+
+    <label for="staticPhone" class="col-sm-2 col-form-label"><p><b>Telefono</b>:
+        <input type="text" value={{user.phone}} disabled></p></label>
+
+    <label for="staticCity" class="col-sm-2 col-form-label"><p><b>Città</b>:
+        <input type="text" value={{user.address.city}} disabled></p></label>
+        
+    <label for="staticAddress" class="col-sm-2 col-form-label"><p><b>Indirizzo</b>:
+        <input type="text" value={{user.address.street}} disabled></p></label>
+
+    <label for="staticWebSite" class="col-sm-2 col-form-label"><p><b>Sito Web</b>:
+        <input type="text" value={{user.website}} disabled></p></label>
+
+    <label for="staticGeoLat" class="col-sm-2 col-form-label"><p><b>Latitudine</b>:
+        <input type="text" value={{user.address.geo.lat}} disabled></p></label>
+
+    <label for="staticGeoLng" class="col-sm-2 col-form-label"><p><b>Longitudine</b>:
+        <input type="text" value={{user.address.geo.lat}} disabled></p></label>
+
+    <label for="staticCompanyName" class="col-sm-2 col-form-label"><p><b>Azienda</b>:
+        <input type="text" value={{user.company.name}} disabled></p></label>
+
+    <label for="staticCombanyBs" class="col-sm-2 col-form-label"><p><b>Azienda bs</b>:
+        <input type="text" value={{user.company.bs}} disabled></p></label>
+
+    <label for="staticCompanyPhrase" class="col-sm-2 col-form-label"><p><b>Azienda frase</b>:
+        <input type="text" value={{user.company.catchPhrase}} disabled></p></label>
+    </div>
+</form>

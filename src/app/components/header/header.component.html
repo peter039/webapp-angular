@@ -1,0 +1,11 @@
+<!-- 
+  Ho creato una toolbar nel componente header collegandola anche agli altri componenti tramite il router-outlet, così anche se con il router link si cambia componente 
+  la toolbar sarebbe stata uguale per tutti
+-->
+<mat-toolbar color="primary">
+    <span>Applicazione Angular</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button><a routerLink="home">Home</a></button>
+    <button mat-raised-button style="margin-left: 8px"><a routerLink="table">Tabelle</a></button>
+  </mat-toolbar>
+<router-outlet></router-outlet>

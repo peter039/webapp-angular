@@ -1,0 +1,110 @@
+<!-- Creazione di una table contenente id, name, username, email degli utente
+    Nell'ngFor con la variabile utente ho potuto prendere i dati da userValue(l'array), dopodichè tramite il routerLink contenuto nel button
+    l'url sarebbe cambiato in base all'id dell'utente in modo da poter vedere il profilo privato
+-->
+<!--Form dove è possibile inserire i dati e cliccando sul button "Invia i dati" quello che viene scritto andrò nel falso 
+database fakedb.json-->
+<div class="card">
+    <form [formGroup]="userForm" (ngSubmit)="addItem(userForm.value)">
+        <div class="box">
+                <div class="form-group mt-4"style="margin-top:+5px">
+                    <label>Id</label>
+                </div>
+                <div class="form-row" >
+                    <div class="col">
+                        <input type="text" formControlName="id" class="form-control" placeholder="Id" >
+                        <p>
+                        <small *ngIf="userForm.get('id')?.invalid && userForm.get('id')?.touched">
+                        *Inserire id
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group mt-4"style="margin-top:+5px">
+                    <label>Nome</label>
+                </div>
+                <div class="form-row" >
+                    <div class="col">
+                        <input type="text" formControlName="name" class="form-control" placeholder="Nome">
+                        <p>
+                        <small *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                        *Inserire nome 
+                        </small>
+                    </div>
+                </div>
+            <div class="form-group mt-4" style="margin-top:+5px">
+                    <label>Nome Utente</label>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                    <input type="text" formControlName="username" class="form-control" placeholder="Nome Utente">
+                    <p>
+                        <small *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+                        *Inserire Nome Utente
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group mt-4"style="margin-top: +5px">
+                    <label>Email</label>
+                </div>
+            <div class="form-row" >
+                <div class="col">
+                    <input type="email" formControlName="email" class="form-control" placeholder="example@gmail">
+                </div>
+            </div>&nbsp;   
+                <div class="col-6">
+                    <button mat-raised-button color="primary" type="submit" >Invia dati</button>
+                    <div *ngIf = "isError" class="error-message">
+                       <small> Si è verificato un errore durante l'invio dei dati. Per favore, riprova più tardi.</small>
+                    </div>
+                </div>&nbsp;
+                <div class="col-6">
+                    <button type="button" mat-raised-button color="primary" (click)="reset()">Reset</button>
+                </div>
+            </div>
+            
+    </form>
+</div>
+
+
+<!--Tabella contenente i dati di entrambi i database-->
+<div class="container">
+    <div>
+        <select (change)="onTableSizeChange($event)">
+        <option *ngFor="let size of tableSizes">{{size}}</option>
+    </select>
+    
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Nome Utente</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor= "let utente of finalValue| paginate: {
+             itemsPerPage: tableSize,
+             currentPage: page,
+             totalItems: count
+           };
+     let i = index">
+            <td>{{utente.id}}</td>
+            <td>{{utente.name}}</td>
+            <td>{{utente.username}}</td>
+            <td>{{utente.email}}</td>
+            <td><button mat-stroked-button color="primary"><a routerLink="{{utente.id}}">Profilo</a></button></td>
+            <td><button mat-stroked-button color="primary" (click)="onUpdateItem(i, utente)" >Modifica</button></td>
+            <td><button mat-stroked-button color="primary" (click)="deleteData(i)" >Elimina</button></td> 
+        </tr>
+        </tbody>
+        <pagination-controls 
+            previousLabel="Precedente"
+            nextLabel="Prossimo"
+            (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+    </table>
+</div>
+
+
