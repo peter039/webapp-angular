@@ -115,8 +115,22 @@ export class TableComponent implements OnInit{
     console.log(this.finalValue);
   }
   
-  onUpdateItem(index: number, newData:any){
-    this.finalValue[index] = newData;
+  onUpdateItem(id: any, newData: any){
+    this.dataUser.updateData(id, newData).subscribe(
+      (response)=>{
+        id = Math.floor(Math.random() * 1000); // Genera un ID casuale compreso tra 0 e 999
+        newData = { name: 'jijj', email: 'nuova@email.com' }; // Dati casuali per la modifica
+        console.log(response)
+      }
+    )
+  }
+
+  onDeleteData(id: any) {
+    this.dataUser.deleteData(id).subscribe(
+      (response) =>{
+        console.log("Dati eliminati")
+      }
+    )
   }
 
 
@@ -144,16 +158,7 @@ export class TableComponent implements OnInit{
   }
 
  
-  deleteData(index:number): void {
-    //this.userValue.forEach((value, index)=>{
-      //if(value == element)
-      //this.userValue.slice(index, 11);
-    //});
-    //this.dataUser.deleteUser
-    this.finalValue.splice(index, 1);
-  }
 
- 
 
   
   

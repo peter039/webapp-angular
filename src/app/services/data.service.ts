@@ -35,6 +35,15 @@ export class DataService {
   
   }
 
+  deleteData(id:number){
+    return this.http.delete(`${this.fakeUrl}/${id}`)
+  }
+
+
+  updateData(id: any, newData:any): Observable<any> {
+    return this.http.put(`${this.fakeUrl}/${id}`, newData)
+  
+  }
   
 
    

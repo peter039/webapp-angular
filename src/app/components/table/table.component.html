@@ -96,7 +96,7 @@ database fakedb.json-->
             <td>{{utente.email}}</td>
             <td><button mat-stroked-button color="primary"><a routerLink="{{utente.id}}">Profilo</a></button></td>
             <td><button mat-stroked-button color="primary" (click)="onUpdateItem(i, utente)" >Modifica</button></td>
-            <td><button mat-stroked-button color="primary" (click)="deleteData(i)" >Elimina</button></td> 
+            <td><button mat-flat-button color="warn" (click)="onDeleteData(utente.id)">Elimina</button></td> 
         </tr>
         </tbody>
         <pagination-controls 
