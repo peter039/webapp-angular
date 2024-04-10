@@ -32,7 +32,7 @@ export class TableComponent implements OnInit{
   data: any;
   finalValue: Array<any> = [];
   isError: boolean= false;
-  
+  selectedItem: any = null;
 
   constructor(private dataUser: DataService, private http: HttpClient, private fb: FormBuilder){
     
@@ -115,14 +115,32 @@ export class TableComponent implements OnInit{
     console.log(this.finalValue);
   }
   
-  onUpdateItem(id: any, newData: any){
-    this.dataUser.updateData(id, newData).subscribe(
-      (response)=>{
-        id = Math.floor(Math.random() * 1000); // Genera un ID casuale compreso tra 0 e 999
-        newData = { name: 'jijj', email: 'nuova@email.com' }; // Dati casuali per la modifica
-        console.log(response)
+  populateForm(selectedItem: any) {
+    // Imposta l'elemento selezionato con i dati dell'elemento corrente
+    this.selectedItem = selectedItem;
+    // Popola il form con i dati dell'elemento selezionato
+    this.userForm.patchValue({
+      id: selectedItem.id,
+      name: selectedItem.name,
+      username: selectedItem.username,
+      email: selectedItem.email
+    });
+  }
+  
+  saveChanges() {
+    const updatedData = { ...this.userForm.value };
+    this.dataUser.updateData(updatedData.id, updatedData).subscribe(
+      response => {
+        console.log('Dati aggiornati con successo:', response);
+        // Aggiorna i dati locali o esegui altre azioni necessarie
+        this.onGetUser(); // Aggiorna i dati nella tabella dopo le modifiche
+        this.selectedItem = null; // Resetta l'elemento selezionato
+        this.userForm.reset(); // Resetta il form dopo il salvataggio delle modifiche
+      },
+      error => {
+        console.error('Errore durante l\'aggiornamento dei dati:', error);
       }
-    )
+    );
   }
 
   onDeleteData(id: any) {

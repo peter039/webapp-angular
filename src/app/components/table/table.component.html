@@ -59,6 +59,7 @@ database fakedb.json-->
                 </div>&nbsp;
                 <div class="col-6">
                     <button type="button" mat-raised-button color="primary" (click)="reset()">Reset</button>
+                    <button type="button" mat-raised-button color="primary" (click)="saveChanges()">Salva Modifiche</button>
                 </div>
             </div>
             
@@ -95,7 +96,7 @@ database fakedb.json-->
             <td>{{utente.username}}</td>
             <td>{{utente.email}}</td>
             <td><button mat-stroked-button color="primary"><a routerLink="{{utente.id}}">Profilo</a></button></td>
-            <td><button mat-stroked-button color="primary" (click)="onUpdateItem(i, utente)" >Modifica</button></td>
+            <td><button mat-stroked-button color="primary" (click)="populateForm(utente)" >Modifica</button></td>
             <td><button mat-flat-button color="warn" (click)="onDeleteData(utente.id)">Elimina</button></td> 
         </tr>
         </tbody>

@@ -1,6 +1,7 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Users } from '../user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +36,14 @@ export class DataService {
   
   }
 
+  //Metodo per cancellare i dati del falso database
   deleteData(id:number){
     return this.http.delete(`${this.fakeUrl}/${id}`)
   }
 
-
-  updateData(id: any, newData:any): Observable<any> {
-    return this.http.put(`${this.fakeUrl}/${id}`, newData)
+  //Metodo per modificare i dati del falso database
+  updateData(user: Users, newData:any): Observable<any> {
+    return this.http.put(`${this.fakeUrl}/${user.id}`, newData)
   
   }
   
