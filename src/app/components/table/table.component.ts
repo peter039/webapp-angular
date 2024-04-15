@@ -28,8 +28,6 @@ export class TableComponent implements OnInit{
   count: number = 0;
   tableSize: number = 5;
   tableSizes: any = [3, 5, 9, 12];
-  fileName: any;
-  data: any;
   finalValue: Array<any> = [];
   isError: boolean= false;
   selectedItem: any = null;
@@ -44,7 +42,6 @@ export class TableComponent implements OnInit{
       email: new FormControl('', [Validators.required, Validators.email])
       })
     
-    //Sto usando il metodo getAllUsers, che si trova nel service, per far si che userValue sia uguale al parametro response per pubblicare i dati
     
     
   }
@@ -81,7 +78,6 @@ export class TableComponent implements OnInit{
 
 
   //Metodo per mostrare i dati presenti nell'array userValue1 che si trovano in db.json
-  //
   async onGetUser(){
   await this.dataUser.getAllUsers().subscribe(
      async (response)=>{
@@ -92,7 +88,7 @@ export class TableComponent implements OnInit{
     }
     
   
-
+  //Metodo per mostraere i dati presenti nell'array userValue2 che si trovano in fakedb.json
   onGetData(){
     this.dataUser.getAllData().subscribe(
       (response)=>{
@@ -114,35 +110,10 @@ export class TableComponent implements OnInit{
     }
     console.log(this.finalValue);
   }
-  
-  populateForm(selectedItem: any) {
-    // Imposta l'elemento selezionato con i dati dell'elemento corrente
-    this.selectedItem = selectedItem;
-    // Popola il form con i dati dell'elemento selezionato
-    this.userForm.patchValue({
-      id: selectedItem.id,
-      name: selectedItem.name,
-      username: selectedItem.username,
-      email: selectedItem.email
-    });
-  }
-  
-  saveChanges() {
-    const updatedData = { ...this.userForm.value };
-    this.dataUser.updateData(updatedData.id, updatedData).subscribe(
-      response => {
-        console.log('Dati aggiornati con successo:', response);
-        // Aggiorna i dati locali o esegui altre azioni necessarie
-        this.onGetUser(); // Aggiorna i dati nella tabella dopo le modifiche
-        this.selectedItem = null; // Resetta l'elemento selezionato
-        this.userForm.reset(); // Resetta il form dopo il salvataggio delle modifiche
-      },
-      error => {
-        console.error('Errore durante l\'aggiornamento dei dati:', error);
-      }
-    );
-  }
 
+  
+ 
+  //Metodo per eliminare i dati richiamandolo dal service
   onDeleteData(id: any) {
     this.dataUser.deleteData(id).subscribe(
       (response) =>{
@@ -170,7 +141,7 @@ export class TableComponent implements OnInit{
   }
 
   
-  //Metodo con cui puoi resettare i dati prima di inviarli 
+  //Metodo con cui puoi resettare i dati, inseriti nel form, prima di inviarli 
   reset(){
     this.userForm.reset();
   }

@@ -40,14 +40,6 @@ export class DataService {
   deleteData(id:number){
     return this.http.delete(`${this.fakeUrl}/${id}`)
   }
-
-  //Metodo per modificare i dati del falso database
-  updateData(user: Users, newData:any): Observable<any> {
-    return this.http.put(`${this.fakeUrl}/${user.id}`, newData)
-  
-  }
-  
-
    
 
 }
