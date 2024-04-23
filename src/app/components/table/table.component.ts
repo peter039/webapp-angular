@@ -41,25 +41,21 @@ export class TableComponent implements OnInit{
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email])
       })
-    
-    
-    
   }
-
 
   ngOnInit(): void {
   this.onGetUser()
   
 }
 
-  //Metodo che si attiva premendo il button
+  //Metodo per l'aggiunta dei dati che si attiva premendo il button "Invia dati"
   addItem(mockUrl:string): void{
     //Se l'array risulta vuoto non invierà dati al database
     if (this.userForm.invalid) {
       this.isError = true;
       return;
     }
-    //Dopo aver inserito i dati
+    //Dopo aver inserito i dati essi andranno nel fakedb.json e verranno anche salvati nell'localhost
     this.finalValue.push(this.userForm.value);
     this.dataUser.postData(this.userForm.value).subscribe((response)=>{
       this.isError = false;
@@ -73,9 +69,7 @@ export class TableComponent implements OnInit{
     console.log(this.finalValue);
     localStorage.setItem('user',JSON.stringify(this.finalValue))
     this.userForm.reset();
-    
   }
-
 
   //Metodo per mostrare i dati presenti nell'array userValue1 che si trovano in db.json
   async onGetUser(){
@@ -86,8 +80,7 @@ export class TableComponent implements OnInit{
         await this.onGetData()
     });
     }
-    
-  
+      
   //Metodo per mostraere i dati presenti nell'array userValue2 che si trovano in fakedb.json
   onGetData(){
     this.dataUser.getAllData().subscribe(
@@ -99,9 +92,9 @@ export class TableComponent implements OnInit{
         
     });
   }
-
-  unionValue(){
+ 
   //Metodo per l'unione dei dati dei due array
+  unionValue(){ 
   for (let user of this.userValue1) {
     this.finalValue.push(user);
   }
@@ -110,22 +103,18 @@ export class TableComponent implements OnInit{
     }
     console.log(this.finalValue);
   }
-
   
  
   //Metodo per eliminare i dati richiamandolo dal service
   onDeleteData(id: any) {
+    if(confirm("Sicuro di voler cancellare?")){
     this.dataUser.deleteData(id).subscribe(
       (response) =>{
-        console.log("Dati eliminati")
-      }
-    )
+        console.log("Dati eliminati", response)
+      })
+    }
   }
 
-
-  getViewProfile(Users: any){
-    console.log(Users);
-  }
 
   //Metodo per cambiare la pagina della tabella
   onTableDataChange(event: any) {
@@ -141,7 +130,7 @@ export class TableComponent implements OnInit{
   }
 
   
-  //Metodo con cui puoi resettare i dati, inseriti nel form, prima di inviarli 
+  //Metodo con cui puoi resettare i dati inseriti nel form, prima di inviarli 
   reset(){
     this.userForm.reset();
   }

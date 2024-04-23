@@ -11,7 +11,6 @@ const routes: Routes = [
     {path:'home' , component: HomeComponent},
     {path:'table' , component: TableComponent},
     {path:'table/:id', component: UsersComponent}
-  
   ]},
   
   

@@ -20,10 +20,6 @@ constructor(private data: DataService, private activateRoute: ActivatedRoute){}
 
 
   ngOnInit(): void {
-    //Dichiarando il service e l'activatedRoute nel costruttore ho potuto prendere il parametro id
-    //Dopo aver creato l'user.module.ts ho potuto creare la proprietà user paragonandola alla Users e poter prendere tutti i dati da aggiungere tramite pipe nell'users.component.html 
-
-    
     this.activateRoute.params.subscribe((params) => this.id = params['id']);
     console.log(this.activateRoute.snapshot.params['id'])
     this.data.getUser(this.id)

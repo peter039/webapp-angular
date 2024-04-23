@@ -20,26 +20,23 @@ export class DataService {
     return this.http.get(this.url)
   }
 
-  //Metodo per mostrare i dati tramite l'id del singolo utente (Aggiungere barra laterale nel mezzo)
+  //Metodo per mostrare i dati tramite l'id del singolo utente 
   getUser(id: any):Observable<any> {
     return this.http.get(`${this.url}/${id}`)
   }
 
-  //Metodo per mostrare i dati del falso database fakedb.json
+  //Metodo per mostrare i dati all'interno del fakedb.json
   getAllData(): Observable<any> {
     return this.http.get(`${this.fakeUrl}`)
   }
   
-  //Metodo per inviare i dati al falso database fakedb.json
+  //Metodo per inviare i dati in fakedb.json
   postData(data:any): Observable<any> {
     return this.http.post(`${this.fakeUrl}`, data)
-  
   }
 
-  //Metodo per cancellare i dati del falso database
+  //Metodo per cancellare i dati presenti nel fakedb.json
   deleteData(id:number){
     return this.http.delete(`${this.fakeUrl}/${id}`)
   }
-   
-
 }
